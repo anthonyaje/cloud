@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=/usr/lib64
+includedir=${exec_prefix}/include
+
+Name: libmongoc-1.0
+Description: SSL support for the libmongoc-1.0 library.
+Version: 1.0.2
+Requires: libmongoc-1.0
+Libs:
+Cflags:

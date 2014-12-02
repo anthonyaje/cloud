@@ -1,0 +1,7 @@
+compile mongo-mapper:
+	gcc -o mongo_mapper1 cJSON/cJSON.c mongo_mapper1.c -lm $(pkg-config --cflags --libs libmongoc-1.0)
+
+
+simulate hadoop on local	
+	cat input.16 | ./old_mapper1 |sort| ./reducer1 |sort| ./mapper2 |sort| ./reducer2  > foo
+	./mongo_mapper1 |sort| ./reducer1 |sort| ./mapper2 |sort| ./reducer2  > foo
