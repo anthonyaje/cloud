@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <bson.h>
 #include <mongoc.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 #include "cJSON/cJSON.h"
 
@@ -14,18 +16,26 @@ int main(){
 
 	mongoc_init ();
 
+	int stdout_cpy = dup(1);
+	int stderr_cpy = dup(2);
+	close(1);
+	close(2);
     //client = mongoc_client_new ("mongodb://localhost:27017/");
     client = mongoc_client_new ("mongodb://140.113.216.123:27017/");
     collection = mongoc_client_get_collection (client, "cloud", "Matrix");
     query = bson_new ();
     cursor = mongoc_collection_find (collection, MONGOC_QUERY_NONE, 0, 0, 0, query, NULL, NULL);
 
-	//FILE* fp = fopen("matrix.txt","w");
+	fflush(stdout);
+	dup2(stdout_cpy,1);
+	dup2(stderr_cpy,2);
+	close(stdout_cpy);
+	close(stderr_cpy);
 
+	//FILE* fp = fopen("matrix.txt","w");
     while (mongoc_cursor_next (cursor, &doc)) {
         str = bson_as_json (doc, NULL);
         //printf ("[%s]\n", str);
-	
 			
 		cJSON* root  = cJSON_Parse(str);
 		char* name = cJSON_GetObjectItem(root,"Array")->valuestring;
@@ -45,7 +55,6 @@ int main(){
 			printf("undefined matrix: %s\n",name);
 			break;
 		}
-		
 
         bson_free (str);
     }

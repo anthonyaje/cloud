@@ -114,9 +114,9 @@ DIST_COMMON = $(srcdir)/doc/Makefile.am $(srcdir)/src/Makefile.am \
 #am__append_4 = $(wildcard doc/html/*)
 am__append_5 = $(top_builddir)/src/libmongoc-ssl-1.0.pc
 #am__append_6 = -D_REENTRANT
-am__append_7 = \
-	-DBSON_DISABLE_ASSERT \
-	-DBSON_DISABLE_CHECKS
+#am__append_7 = \
+#	-DBSON_DISABLE_ASSERT \
+#	-DBSON_DISABLE_CHECKS
 
 #am__append_8 = -lws2_32
 am__append_9 = \
@@ -1072,7 +1072,7 @@ htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
 install_sh = ${SHELL} /home/aje/assignment/cloud/mongodb/test/mongo-c-driver-1.0.2/build/autotools/install-sh
-libdir = /usr/lib64
+libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
 localstatedir = ${prefix}/var
@@ -1080,7 +1080,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /usr
+prefix = /usr/local
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin

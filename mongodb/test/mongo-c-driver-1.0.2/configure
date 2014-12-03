@@ -15550,7 +15550,7 @@ $as_echo_n "checking whether to enable debug symbols... " >&6; }
 if test "${enable_debug_symbols+set}" = set; then :
   enableval=$enable_debug_symbols;
         case "$enable_debug_symbols" in
-            yes) enable_debug_symbols="full" ;;
+            yes) enable_debug_symbols="no" ;;
             no|min|full) ;;
             *) as_fn_error $? "Invalid debug symbols option: must be yes, no, min or full." "$LINENO" 5 ;;
         esac
@@ -20863,8 +20863,8 @@ fi
   ENABLE_DEBUG_TRUE=
   ENABLE_DEBUG_FALSE='#'
 else
-  ENABLE_DEBUG_TRUE='#'
-  ENABLE_DEBUG_FALSE=
+  ENABLE_DEBUG_TRUE=
+  ENABLE_DEBUG_FALSE='#'
 fi
 
 
