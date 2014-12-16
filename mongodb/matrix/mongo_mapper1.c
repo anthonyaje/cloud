@@ -5,6 +5,7 @@
 #include <fcntl.h>
 
 #include "cJSON/cJSON.h"
+#include "cJSON/cJSON.c"
 
 int main(){
 	mongoc_client_t *client;

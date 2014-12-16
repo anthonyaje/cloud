@@ -12,13 +12,13 @@ double value_table[BUF_SIZE];
 
 int main(int argc, char ** argv)
 {
-	if(argc == 2){
+//	if(argc == 2){
 		M_dim = atoi(argv[1]);
-	}
-	else{
-		cerr<<"Usage: <mapper/reducer> <matrix_dimension>\n";
-		return -1;
-	}
+//	}
+//	else{
+//		cerr<<"Usage: <mapper/reducer> <matrix_dimension>\n";
+//		return -1;
+//	}
 	
 	char* line = new char[BUF_SIZE];
         while(fgets(line, BUF_SIZE - 1, stdin) != NULL){
