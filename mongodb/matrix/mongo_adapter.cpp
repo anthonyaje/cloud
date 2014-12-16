@@ -5,6 +5,7 @@
 #include <fcntl.h>
 
 #include "cJSON/cJSON.h"
+#include "cJSON/cJSON.c"
 
 int main(){
 	mongoc_client_t *client;
@@ -32,34 +33,20 @@ int main(){
 	close(stdout_cpy);
 	close(stderr_cpy);
 
-	//FILE* fp = fopen("matrix.txt","w");
+	FILE* fp = fopen("input_matrix.txt","w");
     while (mongoc_cursor_next (cursor, &doc)) {
         str = bson_as_json (doc, NULL);
-        //printf ("[%s]\n", str);
-			
 		cJSON* root  = cJSON_Parse(str);
 		char* name = cJSON_GetObjectItem(root,"Array")->valuestring;
 		int row = cJSON_GetObjectItem(root,"i")->valueint;
 		int col = cJSON_GetObjectItem(root,"j")->valueint;
 		double value = cJSON_GetObjectItem(root,"val")->valuedouble;
 
-		//fprintf(fp,"%s\t%d\t%d\t%f\n",matrix,i,j,val);
-		if(strcmp(name,"A")==0){
-			printf("%010d,%s,%010d,%f\n",col,name,row,value);
-
-		}
-		else if(strcmp(name,"B")==0){
-			printf("%010d,%s,%010d,%f\n",row,name,col,value);// i,k,j,v1,v2
-		}
-		else{
-			printf("undefined matrix: %s\n",name);
-			break;
-		}
-
+		fprintf(fp,"%s\t%d\t%d\t%f\n",name,row,col,value);
         bson_free (str);
     }
 
-	//fclose(fp);
+	fclose(fp);
 
     bson_destroy (query);
     mongoc_cursor_destroy (cursor);
