@@ -13,7 +13,7 @@ double value_table[BUF_SIZE];
 int main(int argc, char ** argv)
 {
 //	if(argc == 2){
-		M_dim = atoi(argv[1]);
+//		M_dim = atoi(argv[1]);
 //	}
 //	else{
 //		cerr<<"Usage: <mapper/reducer> <matrix_dimension>\n";

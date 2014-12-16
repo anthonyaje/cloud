@@ -1,18 +1,26 @@
 #!/bin/bash
 
 STREAMJAR=/usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.5.2.jar
-INPUT=/matrix.16
+INPUT=input_matix.txt
 OUTPUT=result.16
 OUTPUT_DIRECTORY=/result
 
-MAPPER1=mongo_mapper1
+MAPPER1=mapper1
 REDUCER1=reducer1
 MAPPER2=mapper2
 REDUCER2=reducer2
 
 hadoop fs -rm -r -f $OUTPUT_DIRECTORY
 hadoop fs -rm -r -f /output
-hadoop jar $STREAMJAR -mapper $MAPPER1 -reducer $REDUCER1 -input /t -output /output -file $MAPPER1 -file $REDUCER1
+#hadoop fs -rm -r -f /input
+
+./mongo_adapter
+
+#hadoop fs -put $INPUT /input/$INPUT
+hadoop fs -ls /input
+
+hadoop jar $STREAMJAR -mapper $MAPPER1 -reducer $REDUCER1 -input /input -output /output -file $MAPPER1 -file $REDUCER1
 hadoop jar $STREAMJAR -mapper $MAPPER2 -reducer $REDUCER2 -input /output/part* -output $OUTPUT_DIRECTORY -file $MAPPER2 -file $REDUCER2
+
 hadoop fs -cat $OUTPUT_DIRECTORY/part* > $OUTPUT
 
